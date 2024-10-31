@@ -8,7 +8,7 @@ double calculateFormula(double x, int n) {
         return 0;
     }
     double result = 0.0;
-    if (x < 3) {
+    if (x < 4) {
         result = 5 * x - 2;
         double doubleSum = 0.0;
 
