@@ -1,8 +1,11 @@
+#define TEST_MODE
 #include <iostream>
 #include <cmath>
 #include <limits>
+#include <string>
+#include "task1.h"
 using namespace std;
-
+ 
 double calculateFormula(double x, int n) {
     if (n <= 7) {
         cout << "n must be greater than 7!" << endl;
@@ -33,7 +36,7 @@ double calculateFormula(double x, int n) {
     return result;
 }
 
-void getInput(double& value, const char* prompt) {
+void getInput(double& value, const string& prompt) {
     while (true) {
         cout << prompt;
         cin >> value;
@@ -47,7 +50,7 @@ void getInput(double& value, const char* prompt) {
     }
 }
 
-void getInput(int& value, const char* prompt) {
+void getInput(int& value, const string& prompt) {
     while (true) {
         cout << prompt;
         cin >> value;
@@ -67,7 +70,7 @@ bool askToRunAgain() {
     cin >> choice;
     return (choice == 'y' || choice == 'Y');
 }
-
+#ifndef TEST_MODE 
 int main() {
     bool runAgain = true;
 
@@ -89,3 +92,4 @@ int main() {
 
     return 0;
 }
+#endif

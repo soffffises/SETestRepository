@@ -1,3 +1,4 @@
+#define TEST_MODE
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -91,8 +92,8 @@ bool askToRunAgain() {
     cout << "Do you want to run the program again? (y/n): ";
     cin >> choice;
     return (choice == 'y' || choice == 'Y');
-}
-
+} 
+#ifndef TEST_MODE
 int main() {
     do {
         double a, b, step;
@@ -120,3 +121,4 @@ int main() {
 
     return 0;
 }
+#endif
