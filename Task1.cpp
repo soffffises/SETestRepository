@@ -1,14 +1,18 @@
+#define TEST_MODE
 #include <iostream>
 #include <cmath>
+#include <limits>
+#include <string>
+#include "task1.h"
 using namespace std;
-
+ 
 double calculateFormula(double x, int n) {
     if (n <= 7) {
         cout << "n must be greater than 7!" << endl;
         return 0;
     }
     double result = 0.0;
-    if (x < 4) {
+    if (x < 3) {
         result = 5 * x - 2;
         double doubleSum = 0.0;
 
@@ -36,12 +40,12 @@ void getInput(double& value, const string& prompt) {
     while (true) {
         cout << prompt;
         cin >> value;
-        if (!cin.fail()) {
-            break;
-        } else {
+        if (cin.fail()) {
             cout << "Error: Please enter a valid number!" << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        } else {
+            break;
         }
     }
 }
@@ -50,12 +54,12 @@ void getInput(int& value, const string& prompt) {
     while (true) {
         cout << prompt;
         cin >> value;
-        if (!cin.fail() && value > 7) {
-            break;
-        } else {
+        if (cin.fail() || value <= 7) {
             cout << "Error: Please enter a valid integer greater than 7!" << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        } else {
+            break;
         }
     }
 }
@@ -66,20 +70,26 @@ bool askToRunAgain() {
     cin >> choice;
     return (choice == 'y' || choice == 'Y');
 }
-
+#ifndef TEST_MODE 
 int main() {
-    do {
+    bool runAgain = true;
+
+    while (runAgain) {
         double x;
         int n;
 
-        cout <<"Enter a value of x:" ;
-        cin >> x;
+        getInput(x, "Enter a value of x: ");
         getInput(n, "Enter value for n (must be greater than 7): ");
 
         double result = calculateFormula(x, n);
         cout << "x = " << x << ", Result: " << result << endl;
 
-    } while (askToRunAgain());
+        cout << "Do you want to run the program again? (y/n): ";
+        char choice;
+        cin >> choice;
+        runAgain = (choice == 'y' || choice == 'Y');
+    }
 
     return 0;
 }
+#endif
